@@ -1,0 +1,17 @@
+Fonts used in this design:
+
+Font: Roboto
+Author: Christian Robertson
+Url: http://www.fontsquirrel.com/fonts/roboto
+
+Font: Riffic
+Author: Nini Prower
+Url: http://www.fontsquirrel.com/fonts/riffic
+
+Font: Milkshake
+Author: Laura Worthington
+Url: https://www.fontsquirrel.com/fonts/milkshake
+
+Font: Poppins
+Author: Indian Type Foundry
+Url: https://www.fontsquirrel.com/fonts/poppins

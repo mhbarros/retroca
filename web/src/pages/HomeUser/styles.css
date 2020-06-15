@@ -1,0 +1,147 @@
+button.primary {
+    width: 100%;
+    height: 50px;
+    padding: 2px 20px;
+    background: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    transition: all .1s;
+    outline: none;
+}
+
+button.primary:hover {
+    filter: brightness(.9);
+}
+
+#home-user {
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+}
+
+#home-user .popup-new-event {
+    width: 100%;
+    height: 100%;
+    z-index: 1001;
+    background: rgba(0,0,0,.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+#home-user .popup-new-event .popup-content {
+    width: 400px;
+    min-height: 400px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    margin: 200px auto;
+    justify-content: end;
+}
+
+#home-user .popup-new-event .popup-content .header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+#home-user .popup-new-event .popup-content .header svg{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+#home-user header {
+    width: 100%;
+    margin: 48px 0 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#home-user #user-actions {
+    display: flex;
+    flex-direction: row;
+}
+
+#home-user #user-actions > div:last-child{
+    margin-left: 40px;
+}
+
+
+#home-user #user-actions a{
+    font-size: 18px;
+}
+
+#home-user main {
+    margin-top: 48px;
+}
+
+#home-user #map-container {
+    height: 400px;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+#home-user .leaflet-container {
+    width: 100%;
+    height: 400px;
+    border-radius: 8px;
+}
+
+#home-user section {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.items-grid {
+    display: flex;
+    list-style: none;
+}
+
+.items-grid li {
+    background: #f5f5f5;
+    border: 2px solid #f5f5f5;
+    min-width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    padding: 32px 24px 16px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    text-align: center;
+
+    cursor: pointer;
+}
+
+.items-grid li:not(:first-child) {
+    margin-left: 20px;
+}
+
+.items-grid li img {
+    width: 60px;
+}
+
+.items-grid li span {
+    flex: 1;
+    margin-top: 12px;
+
+    display: flex;
+    align-items: center;
+    color: var(--title-color)
+}
+
+.items-grid li.selected {
+    background: #E1FAEC;
+    border: 2px solid #34CB79;
+}

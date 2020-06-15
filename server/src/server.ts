@@ -1,12 +1,15 @@
 import dotenv from 'dotenv';
+import cors from 'cors';
 dotenv.config();
 
 import express from 'express';
-import path from 'path';
-import routes from './routes';
+import session from './config/session';
+import router from './routes';
 
 const app = express();
 app.use(express.json());
-app.use(routes);
+app.use(cors({credentials: true, origin: true}));
+app.use(session);
+app.use(router);
 
-app.listen(3333);
+app.listen(process.env.SERVER_PORT);

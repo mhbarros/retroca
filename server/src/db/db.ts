@@ -8,7 +8,8 @@ const conn = knex({
         database: process.env.DB_MYSQL_NAME,
         user: process.env.DB_MYSQL_USER,
         password: process.env.DB_MYSQL_PASS
-    }
+    },
+    debug: true
 });
 
 export default conn;
