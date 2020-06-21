@@ -3,7 +3,7 @@ import db from "../db/db";
 
 class ItemController {
   async index(req: Request, res: Response){
-    let {it_i: item_id} = req.query;
+    let {it_i: item_id, us_i: user_id} = req.query;
 
     let table_category_item = db.ref('category_item').as('ci');
     let table_item_cateogry = db.ref('item_category').as('ic');
@@ -30,6 +30,10 @@ class ItemController {
 
     if(item_id){
       query.where('item.id', Number(item_id));
+    }
+
+    if(user_id){
+      query.where('item.id_user', Number(user_id));
     }
 
     let data = await query;

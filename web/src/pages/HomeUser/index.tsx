@@ -42,6 +42,7 @@ const HomeUser: React.FC = () => {
   const [itemCategoryList, setItemCategoryList] = useState<ItemCategoryList[]>([]);
   const [itemList, setItemList]                 = useState([]);
   const [selectedCategory, setSelectedCategory] = useState([]);
+  const [currentGameList, setCurrentGameList]   = useState<Item[]>([]);
 
   const popupItem = useRef<any>();
   const history   = useHistory();
@@ -87,6 +88,17 @@ const HomeUser: React.FC = () => {
 
   const handleCategorySelect = (e: any) => {
 
+  }
+
+  const handleUserSelect = async (userID: number) => {
+    const request = await api.get('/item', {params: {us_i: userID}});
+    if(!request.data.ok){
+      alert("Não foi possível recuperar os jogos deste usuário. Por favor, tente novamente.");
+      return;
+    }
+
+    const {data: games} = request.data;
+    setCurrentGameList(games);
   }
 
   const showPopupItem = () => {
@@ -185,12 +197,19 @@ const HomeUser: React.FC = () => {
               />
               {
                 Object.values(itemList).map(el => {
-                  let teste: Item = el;
-                  return <Marker key={teste.user_id} position={[teste.latitude, teste.longitude]}/>
+                  let user: Item = el;
+                  return <Marker key={user.user_id} position={[user.latitude, user.longitude]} onclick={() => {handleUserSelect(user.user_id)}}/>
                 })
               }
             </Map>
           </div>
+          {
+            currentGameList.map(game => (
+              <div className={'games-container'}>
+                {JSON.stringify(game)}
+              </div>
+            ))
+          }
         </main>
       </div>
     </div>
