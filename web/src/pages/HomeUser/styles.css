@@ -84,18 +84,6 @@ button.primary:hover {
     margin-top: 48px;
 }
 
-#home-user #map-container {
-    height: 400px;
-    margin-top: 20px;
-    border-radius: 8px;
-}
-
-#home-user .leaflet-container {
-    width: 100%;
-    height: 400px;
-    border-radius: 8px;
-}
-
 #home-user section {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -144,4 +132,62 @@ button.primary:hover {
 .items-grid li.selected {
     background: #E1FAEC;
     border: 2px solid #34CB79;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+    max-height: 400px;
+    margin-top: 20px;
+}
+
+#home-user .leaflet-container {
+    width: 100%;
+    height: 400px;
+    border-radius: 8px;
+}
+
+#home-user .map-container {
+    flex: 2;
+    height: 100%;
+    border-radius: 8px;
+    margin-right: 5px;
+}
+
+.games-container {
+    flex: 1;
+    display: flex;
+    background: white;
+    border-radius: 8px;
+    width: 100%;
+    min-height: 100px;
+    margin-left: 5px;
+}
+
+.games-container .no-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.games-container .games-user {
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.games-container .games-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.games-container .games-content ul {
+    list-style: none;
+}
+
+.games-container .no-content svg{
+    margin-top: 10px;
+    color: #bbb
 }

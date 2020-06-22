@@ -26,6 +26,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: Ubuntu, sans-serif;
 }
 
+.gray {
+  color: #bbb
+}
+
 .content {
   width: 100%;
   height: 100%;

@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef, ChangeEvent} from 'react';
-import {FiX} from 'react-icons/fi';
+import {FiX, FiSearch} from 'react-icons/fi';
 
 import {Map, Marker, TileLayer, Popup} from 'react-leaflet';
 
@@ -31,6 +31,13 @@ interface Item {
   uf: string;
 }
 
+interface User {
+  id: number;
+  name: string;
+  phone: string;
+  games: Item[]
+}
+
 const HomeUser: React.FC = () => {
 
   const [userName, setUserName]                     = useState('');
@@ -42,7 +49,7 @@ const HomeUser: React.FC = () => {
   const [itemCategoryList, setItemCategoryList] = useState<ItemCategoryList[]>([]);
   const [itemList, setItemList]                 = useState([]);
   const [selectedCategory, setSelectedCategory] = useState([]);
-  const [currentGameList, setCurrentGameList]   = useState<Item[]>([]);
+  const [currentUser, setCurrentUser]           = useState<User>();
 
   const popupItem = useRef<any>();
   const history   = useHistory();
@@ -98,7 +105,15 @@ const HomeUser: React.FC = () => {
     }
 
     const {data: games} = request.data;
-    setCurrentGameList(games);
+
+    const currentUser: User = {
+      id: games[0].user_id,
+      name: games[0].user_name,
+      phone: games[0].user_phone,
+      games
+    }
+
+    setCurrentUser(currentUser);
   }
 
   const showPopupItem = () => {
@@ -189,27 +204,48 @@ const HomeUser: React.FC = () => {
               }
             </ul>
           </div>
-          <div id={'map-container'}>
-            <Map center={[-22.930232, -43.1775141]} zoom={15} >
-              <TileLayer
-                attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
+          <div className={'main-container'}>
+            <div className={'map-container'}>
+              <Map center={[-22.930232, -43.1775141]} zoom={15} >
+                <TileLayer
+                  attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                {
+                  Object.values(itemList).map(el => {
+                    let user: Item = el;
+                    return <Marker key={user.user_id} position={[user.latitude, user.longitude]} onclick={() => {handleUserSelect(user.user_id)}}/>
+                  })
+                }
+              </Map>
+            </div>
+            <div className={'games-container'} >
               {
-                Object.values(itemList).map(el => {
-                  let user: Item = el;
-                  return <Marker key={user.user_id} position={[user.latitude, user.longitude]} onclick={() => {handleUserSelect(user.user_id)}}/>
-                })
+                currentUser && currentUser.games && currentUser.games.length !== 0 ?
+                  <div className={'games-user'}>
+                    <h2>{currentUser.name}</h2>
+                    <span>Telefone: {currentUser.phone}</span>
+                    <div className={'games-content'}>
+                      <ul>
+                        {
+                          currentUser.games.map(game => (
+                            <li key={game.item_id}>
+                              <h3>{game.item_description}</h3>
+                            </li>
+                          ))
+                        }
+                      </ul>
+                    </div>
+                  </div>
+
+                  :
+                  <div className={'no-content'}>
+                    <h3 className={'gray'}>Selecione um ponto no mapa para verificar os jogos disponíveis</h3>
+                    <FiSearch size={30}/>
+                  </div>
               }
-            </Map>
+            </div>
           </div>
-          {
-            currentGameList.map(game => (
-              <div className={'games-container'}>
-                {JSON.stringify(game)}
-              </div>
-            ))
-          }
         </main>
       </div>
     </div>
